@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 const TuitSchema = new mongoose.Schema({
     tuit: {type: String, required: true},
     postedOn: {type: Date, default: Date.now},

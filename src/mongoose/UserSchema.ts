@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 import Location from "../models/Location";
 const UserSchema = new mongoose.Schema({
     username: {type: String, required: true},
