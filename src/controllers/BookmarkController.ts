@@ -28,7 +28,7 @@ export default class BookmarkController implements BookmarkControllerI {
 
     userBookmarksTuit = (req: Request, res: Response) =>
         BookmarkController.bookmarkDao.userBookmarksTuit(req.params.uid, req.params.tid)
-            .then(bookmark => res.json(bookmark));
+            .then(bookmarks => res.json(bookmarks));
 
 
     userUnbookmarksTuit = (req: Request, res: Response) =>
