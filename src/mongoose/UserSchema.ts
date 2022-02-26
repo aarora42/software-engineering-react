@@ -1,3 +1,6 @@
+/**
+ * @file Implements mongoose schema for users
+ */
 const mongoose = require('mongoose');
 const UserSchema = new mongoose.Schema({
     username: {type: String, required: true, default: `testusername${Date.now()}`},

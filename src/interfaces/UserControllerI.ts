@@ -1,4 +1,7 @@
 
+/**
+ * @file Declares RESTful API for User resource
+ */
 
 import {Request, Response} from "express";
 

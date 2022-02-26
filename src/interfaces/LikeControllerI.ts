@@ -1,3 +1,7 @@
+
+/**
+ * @file Declares RESTful API for Like resource
+ */
 import {Request, Response} from "express";
 
 export default interface LikeControllerI {

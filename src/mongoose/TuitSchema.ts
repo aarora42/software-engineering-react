@@ -1,3 +1,6 @@
+/**
+ * @file Implements mongoose schema for tuits
+ */
 const mongoose = require('mongoose');
 const TuitSchema = new mongoose.Schema({
     tuit: {type: String, required: true},
