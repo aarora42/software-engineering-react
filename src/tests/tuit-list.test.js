@@ -1,4 +1,4 @@
-import {Tuits} from "../components/tuits/index";
+import Tuits from "../components/tuits/";
 import {screen, render} from "@testing-library/react";
 import {HashRouter} from "react-router-dom";
 import {findAllTuits} from "../services/tuits-service";
@@ -9,11 +9,15 @@ import {findAllUsers} from "../services/users-service";
 jest.mock('axios');
 
 const MOCKED_USERS = [
-  "alice", "bob", "charlie"
+    {username: 'alice', _id:'1'},
+    {username: 'bob', _id:'2'},
+    {username: 'charlie', _id:'3'}
 ];
 
 const MOCKED_TUITS = [
-  "alice's tuit", "bob's tuit", "charlie's tuit"
+    {tuit:"alice's tuit", postedBy:MOCKED_USERS[0]._id, _id:'1'},
+    {tuit:"bob's tuit", PostedBy:MOCKED_USERS[1]._id, _id:'2' },
+    {tuit:"charlie's tuit", PostedBY:MOCKED_USERS[2]._id, _id:'3'}
 ];
 
 test('tuit list renders static tuit array', () => {
