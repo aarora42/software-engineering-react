@@ -1,9 +1,13 @@
+
 import {
   createUser,
   deleteUsersByUsername, findAllUsers,
   findUserById
 } from "../services/users-service";
 
+/**
+ * @jest-environment node
+ */
 describe('createUser', () => {
   // sample user to insert
   const ripley = {

@@ -3,6 +3,8 @@ import axios from "axios";
 const TUITS_API = "https://anusha-node.herokuapp.com/api/tuits";
 const USERS_API = "https://anusha-node.herokuapp.com/api/users";
 
+
+
 export const findAllTuits = () =>
     axios.get(TUITS_API)
         .then(response => response.data);
@@ -25,4 +27,8 @@ export const updateTuit = (tid, tuit) =>
 
 export const deleteTuit = (tid) =>
     axios.delete(`${TUITS_API}/${tid}`)
+        .then(response => response.data);
+
+export const deleteTuitsByUser = (uid) =>
+    axios.get(`${USERS_API}/${uid}/tuits/delete`)
         .then(response => response.data);
