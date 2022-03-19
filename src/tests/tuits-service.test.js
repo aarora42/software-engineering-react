@@ -36,15 +36,9 @@ describe('can create tuit with REST API', () => {
         tuit: 'sample tuit content'
     }
     let newTuitId;
-    // setup test before running test
-    // beforeAll(() => {
-    //     // remove any/all users to make sure we create it in the test
-    //     return deleteUsersByUsername(ripley.username);
-    // })
 
-    // clean up after test runs
+
     afterAll( () =>
-            // remove any data we created
         {
             return deleteTuit(newTuitId);
         }
@@ -64,16 +58,6 @@ describe('can delete tuit wtih REST API', () => {
         tuit: 'tuit to be deleted',
     };
 
-    // setup the tests before verification
-    // beforeAll(() => {
-    //     // insert the sample user we then try to remove
-    // });
-
-    // clean up after test runs
-    // afterAll(() => {
-    //     // remove any data we created
-    //     return deleteTuit(dTuit._id)
-    // })
 
     test('can delete tuit with REST API', async () => {
         // delete a tuit by its primary key
@@ -86,22 +70,10 @@ describe('can delete tuit wtih REST API', () => {
 });
 
 describe('can retrieve a tuit by their primary key with REST API', () => {
-    // sample user we want to retrieve
     const SamTuit = {
         tuit: 'Sam wrote this tuit',
     };
 
-    // setup before running test
-    // beforeAll(() => {
-    //     // clean up before the test making sure the user doesn't already exist
-    //     return deleteTuit('1111');
-    // });
-
-    // clean up after ourselves
-    // afterAll(() => {
-    //     // remove any data we inserted
-    //     return deleteTuit('1111');
-    // });
 
     test('can retrieve user from REST API by primary key', async () => {
         // insert the tuit in the database
@@ -120,45 +92,42 @@ describe('can retrieve a tuit by their primary key with REST API', () => {
 });
 
 describe('can retrieve all tuits with REST API', () => {
-
-    // sample tuits we'll insert to then retrieve
-    const tuits = [
-        "t1", "t2", "t3"
+    let tuitBody = [
+        "testT", "testT2", "testT3"
     ];
 
-    // setup data before test
-    beforeAll(() =>
-        // insert several known users
-        tuits.map(sampleT =>
-            createTuit(newUser._id,{
-                tuit: sampleT
-            })
-        )
+    beforeAll(() => {
+            return Promise.all(
+                tuitBody.map(
+                    sampleT =>
+                        createTuit(newUser._id, {tuit: sampleT})
+                ));
+        }
     );
 
-    // clean up after ourselves
-    afterAll(() =>
-        // delete the users we inserted
-            deleteTuitsByUser(newUser._id)
-
+    afterAll( async () =>{
+            const toBeDeleted = await findTuitByUser(newUser._id);
+            return Promise.all(toBeDeleted.map(tuit =>
+                deleteTuit(tuit._id)));
+        }
     );
 
-    test('can retrieve all tuits from REST API', async () => {
-        // retrieve all the users
-        const newTuits = await findAllTuits();
+    test('can retrieve all tuits with REST API', async () => {
+        const tuits = await findAllTuits();
 
-        // there should be a minimum number of users
-        expect(newTuits.length).toBeGreaterThanOrEqual(tuits.length);
+        expect(tuits.length).toBeGreaterThanOrEqual(tuitBody.length);
+        const inserted = tuits.filter(
+            sampleT => tuitBody.indexOf(sampleT.tuit) >= 0);
 
-        // let's check each user we inserted
-        const tuitsWeInserted = newTuits.filter(
-            sampleT => tuits.indexOf(sampleT.tuit) >= 0);
-
-        // compare the actual users in database with the ones we sent
-        tuitsWeInserted.forEach(sampleT => {
-            const tuitContent = tuits.find(tuitContent => tuitContent === sampleT.tuit);
+        expect(inserted.length).toBeGreaterThanOrEqual(tuitBody.length);
+        inserted.forEach(sampleT => {
+            const tuitContent = tuitBody.find(
+                (tuitContent) => tuitContent === sampleT.tuit
+            );
             expect(sampleT.tuit).toEqual(tuitContent);
-            expect(sampleT.postedBy).toEqual(newUser._id);
+            expect(sampleT.postedBy).toEqual(newUser._id)
         });
-    });
+    })
 });
+
+
