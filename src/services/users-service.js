@@ -1,9 +1,14 @@
 import axios from "axios";
-const BASE_URL = "https://anusha-node.herokuapp.com/api";
+const BASE_URL = "https://anusha-node-a4.herokuapp.com/api";
+// const BASE_URL = "http://localhost:4000/api";
 
-
-const LOGIN_API = `${BASE_URL}/login`;
+const SECURITY_API = `${BASE_URL}/auth`;
 const USERS_API = `${BASE_URL}/users`;
+
+const api = axios.create({
+  withCredentials: true
+});
+
 
 export const createUser = (user) =>
   axios.post(`${USERS_API}`, user)
@@ -26,8 +31,24 @@ export const deleteUsersByUsername = (username) =>
     .then(response => response.data);
 
 export const findUserByCredentials = (credentials) =>
-  axios.post(`${LOGIN_API}`, credentials)
+  axios.get(`${SECURITY_API}/login`, credentials)
     .then(response => response.data);
+
+export const register = (user) =>
+    api.post(`${SECURITY_API}/register`, user)
+        .then(response => response.data);
+
+export const login = (user) =>
+    api.post(`${SECURITY_API}/login`, user)
+        .then(response => response.data);
+
+export const logout = (user) =>
+    api.post(`${SECURITY_API}/logout`, user)
+        .then(response => response.data);
+
+export const profile = () =>
+    api.post(`${SECURITY_API}/profile`)
+        .then(response => response.data);
 
 const service = {
   findAllUsers

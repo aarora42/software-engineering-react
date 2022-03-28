@@ -1,34 +1,46 @@
 import axios from "axios";
-
-const TUITS_API = "https://anusha-node.herokuapp.com/api/tuits";
-const USERS_API = "https://anusha-node.herokuapp.com/api/users";
+const BASE_URL = "https://anusha-node-a4.herokuapp.com/api";
 
 
+const TUITS_API = `${BASE_URL}/tuits`;
+const USERS_API = `${BASE_URL}/users`;
+
+const api = axios.create({
+    withCredentials: true
+});
+
+export const findAllTuitsByUser = (uid) =>
+    api.get(`${USERS_API}/${uid}/tuits`)
+        .then(response => response.data);
+
+export const createTuitByUser = (uid, tuit) =>
+    api.post(`${USERS_API}/${uid}/tuits`, tuit)
+        .then(response => response.data);
 
 export const findAllTuits = () =>
-    axios.get(TUITS_API)
+    api.get(TUITS_API)
         .then(response => response.data);
 
 export const findTuitById = (tid) =>
-    axios.get(`${TUITS_API}/${tid}`)
+    api.get(`${TUITS_API}/${tid}`)
         .then(response => response.data);
 
 export const findTuitByUser = (uid) =>
-    axios.get(`${USERS_API}/${uid}/tuits`)
+    api.get(`${USERS_API}/${uid}/tuits`)
         .then(response => response.data);
 
 export const createTuit = (uid, tuit) =>
-    axios.post(`${USERS_API}/${uid}/tuits`, tuit)
+    api.post(`${USERS_API}/${uid}/tuits`, tuit)
         .then(response => response.data);
 
 export const updateTuit = (tid, tuit) =>
-    axios.post(`${TUITS_API}/${tid}`, tuit)
+    api.post(`${TUITS_API}/${tid}`, tuit)
         .then(response => response.data);
 
 export const deleteTuit = (tid) =>
-    axios.delete(`${TUITS_API}/${tid}`)
+    api.delete(`${TUITS_API}/${tid}`)
         .then(response => response.data);
 
 export const deleteTuitsByUser = (uid) =>
-    axios.get(`${USERS_API}/${uid}/tuits/delete`)
+    api.get(`${USERS_API}/${uid}/tuits/delete`)
         .then(response => response.data);
