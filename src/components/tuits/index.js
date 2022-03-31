@@ -3,16 +3,9 @@ import './tuits.css';
 import Tuit from "./tuit";
 import * as likesService from "../../services/likes-service";
 import * as service from "../../services/tuits-service";
-//test
 const Tuits = ({tuits = [], refreshTuits}) => {
     const likeTuit = (tuit) =>
-        likesService
-            .userTogglesTuitLikes("me", tuit._id)
-            .then(refreshTuits)
-            .catch(e => alert(e))
-    const unlikeTuit = (tuit) =>
-        likesService
-            .userTogglesTuitUnlikes("me", tuit._id)
+        likesService.userLikesTuit("me", tuit._id)
             .then(refreshTuits)
             .catch(e => alert(e))
     const deleteTuit = (tid) =>
@@ -27,7 +20,6 @@ const Tuits = ({tuits = [], refreshTuits}) => {
                         <Tuit key={tuit._id}
                               deleteTuit={deleteTuit}
                               likeTuit={likeTuit}
-                              unlikeTuit={unlikeTuit}
                               tuit={tuit}/>)
                 }
             </ul>
