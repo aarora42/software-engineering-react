@@ -1,22 +1,24 @@
 import axios from "axios";
 const BASE_URL = "https://anusha-node-a4.herokuapp.com/api";
 
-const AUTH_API = `${BASE_URL}/auth`
+const SECURITY_API = `${BASE_URL}/auth`
 
 const api = axios.create({
     withCredentials: true
 });
 
-export const signup = (user) =>
-    api.post(`${AUTH_API}/signup`, user)
+export const register = (user) =>
+    api.post(`${SECURITY_API}/register`, user)
         .then(response => response.data);
-export const profile = () =>
-    api.post(`${AUTH_API}/profile`)
+
+export const login = (user) =>
+    api.post(`${SECURITY_API}/login`, user)
         .then(response => response.data);
 
 export const logout = (user) =>
-    api.post(`${AUTH_API}/logout`, user)
+    api.post(`${SECURITY_API}/logout`, user)
         .then(response => response.data);
-export const login = (credentials) =>
-    api.post(`${AUTH_API}/login`, credentials)
+
+export const profile = () =>
+    api.post(`${SECURITY_API}/profile`)
         .then(response => response.data);

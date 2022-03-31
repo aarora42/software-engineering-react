@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 const Profile = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({});
+
   useEffect(async () => {
     try {
       const user = await service.profile();

@@ -1,6 +1,7 @@
 import {Link, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import * as service from "../../services/users-service";
+import * as authService from "../../services/auth-service";
 import React from "react";
 import {UserList} from "./user-list";
 
@@ -29,8 +30,8 @@ export const Login = () => {
         service.createUser(newUser)
             .then(findAllUsers);
     const login = () =>
-        service.login(loginUser)
-            .then((user) => navigate('/profile/mytuits'))
+        authService.login(loginUser)
+            .then((loginUser) => navigate('/profile/mytuits'))
             .catch(e => alert(e));
     useEffect(findAllUsers, []);
     return (
