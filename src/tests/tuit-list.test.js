@@ -6,7 +6,7 @@ import axios from "axios";
 import {UserList} from "../components/profile/user-list";
 import {findAllUsers} from "../services/users-service";
 
-jest.mock('axios');
+jest.mock("axios");
 
 const MOCKED_USERS = [
     {username: 'alice', _id:'1'},
