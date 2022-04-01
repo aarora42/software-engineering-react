@@ -16,6 +16,7 @@ const TuitStats = ({tuit, likeTuit, dislikeTuit = () => {}}) => {
                 }
             </div>
             <div className="col">
+                <i className="fa-solid fa-thumbs-up"></i>
           <span className="ttr-like-tuit-click" onClick={() => likeTuit(tuit)}>
               {
                   tuit.stats && tuit.stats.likes && tuit.stats.likes > 0 &&
@@ -23,7 +24,7 @@ const TuitStats = ({tuit, likeTuit, dislikeTuit = () => {}}) => {
               }
               {
                   tuit.stats && tuit.stats.likes && tuit.stats.likes == 0 &&
-                  <i className="fa-solid fa-thumbs-up" style={{color: "black"}}></i>
+                  <i className="fa-solid fa-thumbs-up"></i>
               }
               <span className="ttr-stats-likes">{tuit.stats && tuit.stats.likes}</span>
           </span>
