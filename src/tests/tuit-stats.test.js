@@ -1,5 +1,5 @@
 import {act, create} from 'react-test-renderer';
-import TuitStats from "./tuit-stats";
+import TuitStats from "../components/tuits/tuit-stats";
 import React from "react";
 
 test('stats render correctly', () => {
